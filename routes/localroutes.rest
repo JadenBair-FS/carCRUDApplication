@@ -1,8 +1,7 @@
 GET http://localhost:8000/api/v1/cars
-
 ###
 
-GET http://localhost:8000/api/v1/cars/656d19fc8462aaf8a7ba339a
+GET http://localhost:8000/api/v1/
 
 ###
 
@@ -11,16 +10,17 @@ Content-Type: application/json
 
 {
     "make": "Ford",
-    "model": "F-150"
+    "model": "Mustang",
+    "year": "2019"
 }
 
 ###
 
-DELETE http://localhost:8000/api/v1/cars/656d19fc8462aaf8a7ba339a
+DELETE http://localhost:8000/api/v1/
 
 ###
 
-PATCH http://localhost:8000/api/v1/cars/656d19fc8462aaf8a7ba339a
+PATCH http://localhost:8000/api/v1/
 Content-Type: application/json
 
 {

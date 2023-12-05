@@ -36,6 +36,7 @@ router.post("/", async (req, res) => {
   const car = new Car({
     make: req.body.make,
     model: req.body.model,
+    year: req.body.year,
   });
   try {
     const newCar = await car.save();
@@ -52,6 +53,9 @@ router.patch("/:id", getCar, async (req, res) => {
   }
   if (req.body.model != null) {
     res.car.model = req.body.model;
+  }
+  if (req.body.year != null) {
+    res.car.year = req.body.year;
   }
   try {
     const updatedCar = await res.car.save();
