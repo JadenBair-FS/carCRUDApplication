@@ -79,13 +79,9 @@ function Dashboard() {
         {error && <p>{error}</p>}
         {loading && <p>Loading...</p>}
         {cars && (
-          <div className="list-group">
+          <div>
             {cars.map((car) => (
-              <Link
-                key={car._id}
-                to={`/car/${car._id}`}
-                className="list-group-item"
-              >
+              <Link key={car._id} to={`/car/${car._id}`}>
                 <br />
                 {car.year} {car.make} {car.model}
                 <br />
