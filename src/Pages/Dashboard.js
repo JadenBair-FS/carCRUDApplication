@@ -73,53 +73,61 @@ function Dashboard() {
   };
 
   return (
-    <div className="container">
-      <h1>Cars</h1>
-      {error && <p>{error}</p>}
-      {loading && <p>Loading...</p>}
-      {cars && (
-        <div className="list-group">
-          {cars.map((car) => (
-            <Link
-              key={car._id}
-              to={`/car/${car._id}`}
-              className="list-group-item"
-            >
-              {car.make} {car.model}
-            </Link>
-          ))}
-        </div>
-      )}
-
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="make">Make</label>
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h1>Cars In Database</h1>
+        {error && <p>{error}</p>}
+        {loading && <p>Loading...</p>}
+        {cars && (
+          <div className="list-group">
+            {cars.map((car) => (
+              <Link
+                key={car._id}
+                to={`/car/${car._id}`}
+                className="list-group-item"
+              >
+                <br />
+                {car.year} {car.make} {car.model}
+                <br />
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+      <div style={styles.card}>
+        <h1 style={styles.center}>Add Car</h1>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div>
+            <label htmlFor="make">Make: </label>
             <input
               type="text"
-              className="form-control"
               id="make"
               name="make"
               onChange={handleInputChanges}
               value={values.make}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="model">Model</label>
+          <div>
+            <label htmlFor="model">Model: </label>
             <input
               type="text"
-              className="form-control"
               id="model"
               name="model"
               onChange={handleInputChanges}
               value={values.model}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleSubmit}
-          >
+          <div>
+            <label htmlFor="year">Year: </label>
+            <input
+              type="text"
+              id="year"
+              name="year"
+              onChange={handleInputChanges}
+              value={values.year}
+            />
+          </div>
+          <button type="submit" onClick={handleSubmit}>
             Submit
           </button>
         </form>
@@ -129,3 +137,31 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "2rem",
+    height: "100vh",
+    backgroundColor: "#f5f5f5",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+  },
+  card: {
+    backgroundColor: "white",
+    padding: "1rem",
+    paddingBottom: "2rem",
+    borderRadius: "5px",
+    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+    textAlign: "center",
+  },
+  center: {
+    textAlign: "center",
+  },
+};

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 function Car() {
   const [loading, setLoading] = useState(false);
@@ -7,6 +7,7 @@ function Car() {
   const [values, setValues] = useState({
     make: "",
     model: "",
+    year: "",
   });
 
   const { id } = useParams();
@@ -36,6 +37,7 @@ function Car() {
           setValues({
             make: data.make,
             model: data.model,
+            year: data.year,
           });
         });
     } catch (error) {
@@ -89,45 +91,91 @@ function Car() {
   };
 
   return (
-    <div>
-      <h1>Car Profile</h1>
-      <h3>
-        {values && values.make} {values && values.model}
-      </h3>
-      {error && <p>{error}</p>}
-      {loading && <p>Loading...</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="make">Make</label>
-          <input
-            type="text"
-            className="form-control"
-            id="make"
-            name="make"
-            onChange={handleInputChanges}
-            value={values.make}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="model">Model</label>
-          <input
-            type="text"
-            className="form-control"
-            id="model"
-            name="model"
-            onChange={handleInputChanges}
-            value={values.model}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Update Car
-        </button>
-        <button type="button" className="btn btn-danger" onClick={deleteCar}>
-          Delete Car
-        </button>
-      </form>
+    <div style={styles.container}>
+      <Link to="/" style={styles.center}>
+        {" "}
+        Back to Dashboard{" "}
+      </Link>
+      <div style={styles.card}>
+        <h1>Car Profile</h1>
+        <h3>
+          {values && values.year} {values && values.make}{" "}
+          {values && values.model}
+        </h3>
+        {error && <p>{error}</p>}
+        {loading && <p>Loading...</p>}
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div>
+            <label htmlFor="make">Make: </label>
+            <input
+              type="text"
+              id="make"
+              name="make"
+              onChange={handleInputChanges}
+              value={values.make}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="model">Model: </label>
+            <input
+              type="text"
+              id="model"
+              name="model"
+              onChange={handleInputChanges}
+              value={values.model}
+            />
+          </div>
+          <div>
+            <label htmlFor="year">Year: </label>
+            <input
+              type="text"
+              id="year"
+              name="year"
+              onChange={handleInputChanges}
+              value={values.year}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Update Car
+          </button>
+          <button type="button" className="btn btn-danger" onClick={deleteCar}>
+            Delete Car
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
 
 export default Car;
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "1rem",
+    height: "100vh",
+    background: "#f5f5f5",
+  },
+  card: {
+    padding: "1rem",
+    margin: "1rem",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    width: "50%",
+    textAlign: "center",
+    background: "white",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1rem",
+  },
+  center: {
+    textAlign: "center",
+  },
+};
